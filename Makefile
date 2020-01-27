@@ -1,7 +1,6 @@
 RPMS_DIR=rpm/
 
 VERSION := $(shell cat version)
-VERSION_VAIO_FIXES := $(shell cat version_vaio_fixes)
 
 DIST_DOM0 ?= fc18
 
@@ -26,7 +25,7 @@ rpms-dom0: rpms-vaio-fixes
 
 rpms-vaio-fixes:
 	rpmbuild --define "_rpmdir $(RPMS_DIR)" -bb rpm_spec/core-dom0-vaio-fixes.spec
-	rpm --addsign $(RPMS_DIR)/x86_64/qubes-core-dom0-vaio-fixes-$(VERSION_VAIO_FIXES)*.rpm
+	rpm --addsign $(RPMS_DIR)/x86_64/qubes-core-dom0-vaio-fixes-$(VERSION)*.rpm
 
 clean:
 	@true
