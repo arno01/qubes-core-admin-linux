@@ -18,7 +18,7 @@ rpms: rpms-dom0
 rpms-vm:
 	@true
 
-rpms-dom0: rpms-vaio-fixes
+rpms-dom0: rpms-vaio-fixes rpms-macbook12-spi-driver
 	rpmbuild --define "_rpmdir $(RPMS_DIR)" -bb rpm_spec/core-dom0-linux.spec
 	rpm --addsign \
 		$(RPMS_DIR)/x86_64/qubes-core-dom0-linux-$(VERSION)*.rpm
@@ -26,6 +26,10 @@ rpms-dom0: rpms-vaio-fixes
 rpms-vaio-fixes:
 	rpmbuild --define "_rpmdir $(RPMS_DIR)" -bb rpm_spec/core-dom0-vaio-fixes.spec
 	rpm --addsign $(RPMS_DIR)/x86_64/qubes-core-dom0-vaio-fixes-$(VERSION)*.rpm
+
+rpms-macbook12-spi-driver:
+	rpmbuild --define "_rpmdir $(RPMS_DIR)" -bb rpm_spec/core-dom0-macbook12-spi-driver.spec
+	rpm --addsign $(RPMS_DIR)/x86_64/qubes-core-dom0-macbook12-spi-driver-$(VERSION)*.rpm
 
 clean:
 	@true

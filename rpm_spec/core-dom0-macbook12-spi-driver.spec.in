@@ -1,0 +1,41 @@
+Name:		qubes-core-dom0-macbook12-spi-driver
+Version:	@VERSION2@
+Release:	1%{?dist}
+Summary:	Additional modules for supporting keyboard, touchpad, touchbar in the MacBooks 2015-2018.
+
+Group:		Qubes
+Vendor:		Invisible Things Lab
+License:	GPL
+URL:		http://www.qubes-os.org
+
+Source0: qubes-core-dom0-linux-@VERSION@.tar.gz
+
+%description
+[Additional modules][1] for supporting keyboard, touchpad, touchbar in the MacBooks 2015-2018.
+
+The [current applespi driver in the upstream Linux 5.3][2] got issues such as a storm of the
+"applespi spi APP00D:00: Received corrupted packet invalid message length 8 num fingers 0 tp len 48"
+occasional system freezes, occasionally you cannot "modprobe -r applespi" as it would just
+hang there without letting the system to gracefully shutdown/reboot.
+
+For more information please refer to the [State of Linux on the MacBook Pro 2016 & 2017 page][3].
+
+[1]: https://github.com/roadrunner2/macbook12-spi-driver
+[2]: https://github.com/torvalds/linux/commit/038b1a05eae6666b731920e46f47d8e2332e07ff
+[3]: https://github.com/Dunedan/mbp-2016-linux
+
+%prep
+%setup -q -n qubes-core-dom0-linux-@VERSION@
+
+%install
+mkdir -p $RPM_BUILD_ROOT/etc/dracut.conf.d/
+install -D macbook12-spi-driver/dracut.conf.d/macbook12-spi-driver.conf $RPM_BUILD_ROOT/etc/dracut.conf.d/
+mkdir -p $RPM_BUILD_ROOT/etc/modprobe.d/
+install -D macbook12-spi-driver/modprobe.d/macbook12-spi-driver.conf $RPM_BUILD_ROOT/etc/modprobe.d/
+
+%files
+/etc/dracut.conf.d/macbook12-spi-driver.conf
+/etc/modprobe.d/macbook12-spi-driver.conf
+
+%changelog
+@CHANGELOG@

@@ -51,6 +51,7 @@ Requires:	%{name}-kernel-install
 Requires:	xdotool
 Requires:	createrepo_c
 Requires:	qubes-core-dom0-vaio-fixes
+Requires:	qubes-core-dom0-macbook12-spi-driver
 
 Source0: %{name}-%{version}.tar.gz
 
